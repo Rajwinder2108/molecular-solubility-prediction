@@ -1,3 +1,4 @@
+## Packages
 python        3.10.16
 pandas        2.2.3
 numpy         1.24.4
@@ -11,7 +12,7 @@ shap          0.47.1
 statsmodels   0.14.6
 
 
-## Modules used
+## Modules
 import sys
 import matplotlib.pyplot as plt 
 import seaborn as sns 
