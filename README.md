@@ -58,10 +58,12 @@ The workflow combines descriptor generation, exploratory data analysis, feature 
 
 **Model selection & training**
 - Linear Regression Models, Tree-based models (Random Forest, Gradient Boosting), kernel-based models (Support Vector Regression) approaches to identify the best fit for the data before commimitting to hyperparameter optimization
-- Hyperparameter tuning via GridSearchCV, LR model reconstruction using SHAP-selected descriptors, k-fold cross-validation, external validation
+- Hyperparameter tuning via GridSearchCV, LR model reconstruction using SHAP-selected descriptors, k-fold cross-validation
 
 **Model interpretation**
-- Feature importance, SHAP (SHapley Additive exPlanations), SHAP dependence plots and partial dependence plots for nonlinearity characterization, 
+- Feature importance, SHAP (SHapley Additive exPlanations),
+- SHAP dependence plots and partial dependence plots for nonlinearity characterization
+- Polynomial Regression models 
 
 ---
 
