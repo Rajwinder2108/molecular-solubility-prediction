@@ -83,7 +83,12 @@ The aim is not just to build accurate models, but to develop a clear picture of 
 - <img width="1273" height="623" alt="05_ML_models_comparison" src="https://github.com/user-attachments/assets/50669ee9-8c2e-435f-8359-d13bdbb22563" />
 
 - Feature importance and SHAPley analysis on the ExtraTrees model suggested that only 5 molecular descriptors were driving the majority of predictions: FilterItLogS (a fragment-based solubility estimate), ZMIC1 (molecular size/complexity), Lipinski rule compliance (drug-likeness), RNCG (charge distribution), and PEOE_VSA6 (electronegative surface area). These 5 descriptors showed 1.3–2× stronger correlation with solubility than any descriptor surviving the initial VIF-based filtering step, confirming that aggressive feature reduction had discarded  important predictive signal while building the initial multivariate linear regression models
+- <img width="812" height="912" alt="06_SHAP_beeswarmplot_ExtraTrees_Model" src="https://github.com/user-attachments/assets/72d26180-b64b-4ec7-bfd7-2569bd54356e" />
+
 - A final multivariate linear regression model was built using only these 5 descriptors that resulted in a strong model performance (Test R² = 0.77 and MAE = 0.70 log units). This model was then assessed using a 10-fold cross-validation on both a held-out test set (R² = 0.81 ± 0.05) and an external set of previously unseen molecules (R² = 0.81, MAE = 0.66). These validations showed only a modest reduction in predictive performance when compared to the full ML model, while producing a simple linear equation a medicinal chemist can easily apply, critique, and trust.
+- <img width="1082" height="845" alt="07_Multivariate_LR_model_with_SHAP_features" src="https://github.com/user-attachments/assets/88cedab8-ed2b-4844-a2d5-94fa7a780a82" />
+<img width="953" height="48" alt="13_Final_linear_equation" src="https://github.com/user-attachments/assets/4e12d809-5ba3-4a96-8de6-448fa1baa1ba" />
+
 - All 5 descriptor–solubility relationships are chemically interpretable: larger, more complex, and more hydrophobic molecules are less soluble (ZMIC1, PEOE_VSA6), while molecules with greater polarity, charge distribution, and drug-like physicochemical properties are more soluble (RNCG, Lipinski, FilterItLogS). Partial dependence and polynomial regression analyses confirmed that these relationships are predominantly linear and additive, explaining why a simple linear model recovers most of the ML model's predictive power.
 
 
