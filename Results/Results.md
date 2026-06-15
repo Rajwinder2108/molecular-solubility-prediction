@@ -63,7 +63,7 @@
 - This observation suggests that aqueous solubility may not be adequately described by a linear model and non-linear relationships between molecular descriptors might play an important role
 - Therefore, non-linear ML regression models were investigated using the full descriptor set (218 descriptors) obtained before VIF filtering
 
-  # Multivariate ML model (Step 10)
+# Multivariate ML model (Step 10)
 - Train Machine Learning (ML) models using 218 descriptors without VIF filtering	Evaluate nonlinear regression models (RF / XGBoost / SVR)	To capture nonlinear structure–property relationships not captured by LR models
 - Following the observation that linear regression models exhibited limited explanatory power, a series of progressively more flexible nonlinear machine learning models were evaluated. These included regularized linear models as baseline comparators, kernel-based methods to capture nonlinear transformations, and ensemble tree-based models capable of learning complex feature interactions
 
@@ -168,6 +168,8 @@
 # Cross-validation and prediction for unseen molecules (Step 19)
 - The robustness and reliability of the final LR model was assessed using 10-fold cross-validation to ensure there was no bias in train:test splits while building the model
 - The generalizability of the model to previously unseen molecules were demonstrated using an external validation set (which was kept untouched during model development)
+<img width="1109" height="823" alt="14_K-fold_Cross_validation" src="https://github.com/user-attachments/assets/9b792669-beef-40a0-9f33-2cfa539c8416" />
+
 <img width="872" height="452" alt="14_K-fold_Cross_validation_summary" src="https://github.com/user-attachments/assets/10e0be5d-4998-4e8e-b73d-1a0c3a01b6ed" />
 <img width="746" height="545" alt="15_Prediction_unseen_molecules" src="https://github.com/user-attachments/assets/f76b2657-d744-401b-b857-37f645220e71" />
 
