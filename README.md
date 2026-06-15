@@ -7,7 +7,7 @@ This project develops predictive models for aqueous solubility of organic molecu
 ## Background
 
 - Aqueous solubility is a fundamental molecular property in drug discovery — it influences how well a compound is absorbed, distributed, and ultimately bioavailable when administered orally. 
-- Poorly soluble compounds frequently fail in development despite showing promising biological activity, which makes early computational assessment of solubility a practical tool for testing candidate molecules before starting cost-intensive experimental synthesis.
+- Poorly soluble compounds frequently fail in development despite showing promising biological activity, which makes early computational assessment of solubility a practical tool for testing candidate molecules before committing to cost-intensive experimental synthesis.
 
 - Solubility prediction is one of the most studied problems in molecular property modeling, which makes it a well-suited benchmark for building and evaluating a reproducible cheminformatics workflow. The goal here is not just to produce a model that scores well, but to understand *why* it works — and whether its behavior makes chemical sense.
 
@@ -36,12 +36,15 @@ The workflow combines descriptor generation, exploratory data analysis, feature 
 2. Generate RDKit molecular descriptors
 3. Perform data cleaning and preprocessing
 4. Explore descriptor distributions and target-property relationships
-5. Identify relevant descriptors through feature selection and dimensionality reduction
-6. Train and compare predictive models
+5. Identify relevant descriptors through feature selection
+6. Train and compare linear regression and machine learning predictive models
 7. Interpret model behavior using feature importance and SHAP analysis
-8. Optimize model hyperparameters
-9. Validate performance using cross-validation
-10.Predict solubility for unseen molecules
+8. Reconstruct interpretable LR model using SHAP-selected descriptors and validate against ML baseline
+9. Univariate analysis of SHAP-selected descriptors
+10. Nonlinearity characterization using SHAP dependence plots, partial dependence plots, polynomial regression
+11. Provide a simple easy-to-use linear equation with chemical interpretation of features used to build the LR model
+12. Validate performance using cross-validation
+13. Predict solubility for unseen molecules
 
 ---
 
@@ -51,14 +54,14 @@ The workflow combines descriptor generation, exploratory data analysis, feature 
 - RDKit, SMILES-based molecular representations
 
 **Feature selection & dimensionality reduction**
-- Pearson correlation, Variance Inflation Factor
+- Pearson correlation, Variance Inflation Factor, SHAP-based feature importance
 
-**Model screening & training**
-- Linear Regression Models, Tree-based models (Random Forest, Gradient Boosting), kernel-based models (Support Vector Regression)
-- Hyperparameter tuning via GridSearchCV, k-fold cross-validation
+**Model selection & training**
+- Linear Regression Models, Tree-based models (Random Forest, Gradient Boosting), kernel-based models (Support Vector Regression) approaches to identify the best fit for the data before commimitting to hyperparameter optimization
+- Hyperparameter tuning via GridSearchCV, LR model reconstruction using SHAP-selected descriptors, k-fold cross-validation, external validation
 
 **Model interpretation**
-- Feature importance, SHAP (SHapley Additive exPlanations)
+- Feature importance, SHAP (SHapley Additive exPlanations), SHAP dependence plots and partial dependence plots for nonlinearity characterization, 
 
 ---
 
@@ -76,7 +79,11 @@ The aim is not just to build accurate models, but to develop a clear picture of 
 
 ## Results Overview
 
-*(To be added upon project completion. Key outputs will include cross-validated performance metrics for each model, SHAP summary plots, and a comparison of the most influential descriptors against the published solubility literature.)*
+- Machine learning models (ExtraTrees, SVR, Random Forest) outperformed linear regression on this dataset, with ExtraTrees model being the best compromise between accuracy and interpretability (Test R² = 0.86 and MAE = 0.50 log units). The prediction uncertainty was well within the < 1 log unit threshold considered acceptable for early-stage drug candidate screening
+- Feature importance and SHAPley analysis on the ExtraTrees model suggested that only 5 molecular descriptors were driving the majority of predictions: FilterItLogS (a fragment-based solubility estimate), ZMIC1 (molecular size/complexity), Lipinski rule compliance (drug-likeness), RNCG (charge distribution), and PEOE_VSA6 (electronegative surface area). These 5 descriptors showed 1.3–2× stronger correlation with solubility than any descriptor surviving the initial VIF-based filtering step, confirming that aggressive feature reduction had discarded  important predictive signal while building the initial multivariate linear regression models
+- A final multivariate linear regression model was built using only these 5 descriptors that resulted in a strong model performance (Test R² = 0.77 and MAE = 0.70 log units). This model was then assessed using a 10-fold cross-validation on both a held-out test set (R² = 0.81 ± 0.05) and an external set of previously unseen molecules (R² = 0.81, MAE = 0.66). These validations showed only a modest reduction in predictive performance when compared to the full ML model, while producing a simple linear equation a medicinal chemist can easily apply, critique, and trust.
+- All 5 descriptor–solubility relationships are chemically interpretable: larger, more complex, and more hydrophobic molecules are less soluble (ZMIC1, PEOE_VSA6), while molecules with greater polarity, charge distribution, and drug-like physicochemical properties are more soluble (RNCG, Lipinski, FilterItLogS). Partial dependence and polynomial regression analyses confirmed that these relationships are predominantly linear and additive, explaining why a simple linear model recovers most of the ML model's predictive power.
+
 
 ---
 
@@ -86,8 +93,8 @@ The aim is not just to build accurate models, but to develop a clear picture of 
 Molecular-Solubility-Prediction/
 ├── data/
 ├── notebooks/
-├── src/
 ├── results/
 ├── figures/
 ├── README.md
 └── requirements.txt
+```
