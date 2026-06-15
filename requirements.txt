@@ -18,9 +18,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 import pandas as pd 
 import numpy as np
+import joblib
 
 ## Sciki-learn
-from sklearn.datasets import load_diabetes
+from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
@@ -35,6 +36,8 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVR
 import time
+from sklearn.inspection import PartialDependenceDisplay
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.decomposition import PCA
 import statsmodels.api as sm
 from lazypredict.Supervised import LazyRegressor
@@ -47,6 +50,8 @@ from scipy.stats import spearmanr
 from collections import defaultdict
 from sklearn.inspection import permutation_importance
 from sklearn.model_selection import RandomizedSearchCV
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from sklearn.model_selection import KFold
 import shap
 
 ## RDKit
