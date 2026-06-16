@@ -81,7 +81,8 @@ This project develops predictive models for aqueous solubility of organic molecu
 ## Results Overview
 
 - ML models (ExtraTrees, SVR, Random Forest) outperformed initial LR baseline, with ExtraTrees model being the best compromise between accuracy and interpretability (Test R² = 0.86 and MAE = 0.50 log units). The prediction uncertainty was well within the < 1 log unit threshold considered acceptable for early-stage drug candidate screening.
-- <img width="1132" height="846" alt="04_Initial_multivariate_LRmodel_18descriptors" src="https://github.com/user-attachments/assets/dd5513ac-dd5d-4c3b-84f0-9300585b57b1" />
+<img width="1132" height="823" alt="04_Initial_multivariate_LRmodel_18descriptors" src="https://github.com/user-attachments/assets/545b3023-8c16-428e-9203-187245b2976a" />
+
 
 - <img width="1273" height="623" alt="05_ML_models_comparison" src="https://github.com/user-attachments/assets/50669ee9-8c2e-435f-8359-d13bdbb22563" />
 
